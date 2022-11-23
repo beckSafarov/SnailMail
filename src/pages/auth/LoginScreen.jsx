@@ -39,12 +39,14 @@ const LoginScreen = () => {
       const res = await axios.post(`${baseUrl}/auth/login`, values, fullConfig)
       setLoading(false)
       const user = res.data.data
-      if(!user.isBlocked){
+      console.log(res)
+      if(user && !user.isBlocked){
         setUser(user)
         navigate('/home')
       }
     }catch(error){
       setLoading(false)
+      console.error(error)
       setError(error.response.data.message)
     }
   }
