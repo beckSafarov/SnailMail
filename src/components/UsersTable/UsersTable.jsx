@@ -46,7 +46,11 @@ export default function UsersTable({ user, onLogout }) {
       const res = await axios.get('/api/users')
       setLoading(false)
       const newUserData = res.data.data
-      setAllUsers(newUserData)
+      if(newUserData){
+        setAllUsers(newUserData)
+        return
+      }
+      console.error({message: 'Received falsey data', data: newUserData})
     } catch (error) {
       setLoading(false)
       console.error(error)
