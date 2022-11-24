@@ -15,7 +15,7 @@ function LandingScreen() {
 
   return (
     <FullyCentered>
-      <h1>Welcome to Tranitionware!</h1>
+      <h1>Welcome to Transitionware!</h1>
       <p>where you can block or delete fellow users you hate</p>
       <Stack
         direction='row'
