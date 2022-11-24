@@ -15,8 +15,8 @@ function LandingScreen() {
 
   return (
     <FullyCentered>
-      <h1>Welcome to Jealousy App!</h1>
-      <p>where you can block or delete fellow users you are jealous of</p>
+      <h1>Welcome to Tranitionware!</h1>
+      <p>where you can block or delete fellow users hate</p>
       <Stack
         direction='row'
         spacing={2}
