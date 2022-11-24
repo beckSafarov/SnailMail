@@ -16,7 +16,7 @@ function LandingScreen() {
   return (
     <FullyCentered>
       <h1>Welcome to Tranitionware!</h1>
-      <p>where you can block or delete fellow users hate</p>
+      <p>where you can block or delete fellow users you hate</p>
       <Stack
         direction='row'
         spacing={2}
