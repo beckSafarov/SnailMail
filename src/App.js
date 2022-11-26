@@ -19,7 +19,7 @@ function App() {
 
   const handleAuth = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/t4/auth/me`, {}, shortConfig)
+      const res = await axios.get(`${baseUrl}/auth/me`, {}, shortConfig)
       setUser(res.data.data)
     } catch (error) {
       authUnsuccessful()

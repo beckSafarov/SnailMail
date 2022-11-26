@@ -10,13 +10,13 @@ function LandingScreen() {
   const navigate = useNavigate()
   
   useEffect(()=>{
-    if (user && !user.isBlocked) navigate('/home') 
+    if (user) navigate('/home') 
   }, [user])
 
   return (
     <FullyCentered>
-      <h1>Welcome to Transitionware!</h1>
-      <p>where you can block or delete fellow users you hate</p>
+      <h1>Welcome to SnailMail 🐌</h1>
+      <p>where you can send and receive 🆒 emails!</p>
       <Stack
         direction='row'
         spacing={2}

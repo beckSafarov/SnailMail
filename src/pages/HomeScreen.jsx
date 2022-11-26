@@ -3,7 +3,6 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import axios from 'axios'
-import UsersTable from '../components/UsersTable/UsersTable'
 import useAuthContext from '../hooks/useAuthContext'
 import { useEffect} from 'react'
 import { baseUrl } from 'src/constants'
@@ -20,7 +19,7 @@ const HomeScreen = () => {
   const handleLogout = async (confirm=true) => {
     if (confirm && !window.confirm('Are you sure to logout?!')) return
     try {
-      await axios.put(`${baseUrl}/t4/auth/logout`, {}, shortConfig)
+      await axios.put(`${baseUrl}/auth/logout`, {}, shortConfig)
       clearUser()
       navigate('/login')
     } catch (error) {
@@ -56,9 +55,7 @@ const HomeScreen = () => {
           </Button>
         </Stack>
       </Box>
-      <Box style={{ marginTop: '70px', padding: '20px' }}>
-        <UsersTable user={user} onLogout={handleLogout} />
-      </Box>
+      <h1>Welcome Home Bro!</h1>
     </>
   )
 }

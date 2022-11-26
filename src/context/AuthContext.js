@@ -20,8 +20,6 @@ const AuthReducer = (state, action) => {
       return {...state, authDone: true}
     case 'clearUser':
       return { authDone: true, user: undefined }
-    case 'block':
-      return { ...state, user: { ...state.user, isBlocked: true } }
     default:
       return state
   }
@@ -37,7 +35,6 @@ export const AuthProvider = ({ children }) => {
   
   const authUnsuccessful = () => dispatch({type: "authFinished"})
   const clearUser = () => dispatch({type: "clearUser"})
-  const block = () => dispatch({type: "block"})
 
   return (
     <AuthContext.Provider value={{
@@ -45,7 +42,6 @@ export const AuthProvider = ({ children }) => {
       setUser,
       authUnsuccessful,
       clearUser,
-      block
     }}>
       {children}
     </AuthContext.Provider>
