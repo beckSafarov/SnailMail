@@ -20,7 +20,7 @@ const HomeScreen = () => {
   const handleLogout = async (confirm=true) => {
     if (confirm && !window.confirm('Are you sure to logout?!')) return
     try {
-      await axios.put(`${baseUrl}/auth/logout`, {}, shortConfig)
+      await axios.put(`${baseUrl}/t4/auth/logout`, {}, shortConfig)
       clearUser()
       navigate('/login')
     } catch (error) {

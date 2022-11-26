@@ -1,1 +1,1 @@
-export const baseUrl = 'https://transitionware-back.herokuapp.com/api'
+export const baseUrl = 'https://transitionware-back.herokuapp.com'

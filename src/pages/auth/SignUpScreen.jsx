@@ -42,7 +42,7 @@ const SignUp = () => {
     if (!isValidated()) return
     setLoading(true)
     try {
-      const res = await axios.post(`${baseUrl}/auth`, values, fullConfig)
+      const res = await axios.post(`${baseUrl}/t4/auth`, values, fullConfig)
       setLoading(false)
       setUser(res.data.data)
       navigate('/home')

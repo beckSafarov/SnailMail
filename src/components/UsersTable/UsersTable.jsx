@@ -43,7 +43,7 @@ export default function UsersTable({ user, onLogout }) {
   const getUsersFromDB = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(`${baseUrl}/users`)
+      const res = await axios.get(`${baseUrl}/t4/users`)
       setLoading(false)
       const newUserData = res.data.data
       if(newUserData){

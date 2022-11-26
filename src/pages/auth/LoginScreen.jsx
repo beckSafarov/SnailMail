@@ -36,10 +36,9 @@ const LoginScreen = () => {
     if(!values.email || !values.password) return
     setLoading(true)
     try{
-      const res = await axios.post(`${baseUrl}/auth/login`, values, fullConfig)
+      const res = await axios.post(`${baseUrl}/t4/auth/login`, values, fullConfig)
       setLoading(false)
       const user = res.data.data
-      console.log(res)
       if(user && !user.isBlocked){
         setUser(user)
         navigate('/home')
