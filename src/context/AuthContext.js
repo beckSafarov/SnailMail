@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react'
+import { clearStore, getStore, setStore } from 'src/utils/lcs';
 
 const initialState = {
-  authDone: false,
-  user: undefined
+  user: getStore('user') || undefined
 }
 
 //create context
@@ -11,15 +11,14 @@ export const AuthContext = createContext(initialState);
 const AuthReducer = (state, action) => {
   switch (action.type) {
     case 'setUser':
+      setStore('user', action.payload)
       return {
         ...state,
-        authDone: true,
         user: action.payload
       }
-    case 'authFinished':
-      return {...state, authDone: true}
     case 'clearUser':
-      return { authDone: true, user: undefined }
+      clearStore('user')
+      return { user: undefined }
     default:
       return state
   }
@@ -33,14 +32,12 @@ export const AuthProvider = ({ children }) => {
     payload: user
   })
   
-  const authUnsuccessful = () => dispatch({type: "authFinished"})
   const clearUser = () => dispatch({type: "clearUser"})
 
   return (
     <AuthContext.Provider value={{
       ...state,
       setUser,
-      authUnsuccessful,
       clearUser,
     }}>
       {children}

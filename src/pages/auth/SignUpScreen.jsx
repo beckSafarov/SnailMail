@@ -10,19 +10,14 @@ import { fullConfig } from '../../utils/rxConfig'
 import useAuthContext from '../../hooks/useAuthContext'
 import { baseUrl } from 'src/constants'
 
-const isValidEmail = (mail) => {
-  const rgx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-  return !!rgx.test(mail)
-}
-
 const SignUp = () => {
   const {user:loggedUser, setUser} = useAuthContext()
-  const [values, setValues] = useState({ name: '', email: '', password: '' })
+  const [values, setValues] = useState({ name: ''})
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   useEffect(()=>{
-    if (loggedUser && !loggedUser.isBlocked) navigate('/home')
+    if (loggedUser) navigate('/home')
   }, [loggedUser])
 
   const handleChange = (e) => {
@@ -33,9 +28,7 @@ const SignUp = () => {
     })
   }
 
-  const isValidated = () => {
-    return Object.values(values).length === 3 && isValidEmail(values.email)
-  }
+  const isValidated = () => !!values.name
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -44,8 +37,11 @@ const SignUp = () => {
     try {
       const res = await axios.post(`${baseUrl}/auth`, values, fullConfig)
       setLoading(false)
-      setUser(res.data.data)
-      navigate('/home')
+      const user = res.data.data
+      if(user){
+        setUser(user)
+        navigate('/home')
+      }
     } catch (error) {
       setLoading(false)
       console.error(error)
@@ -64,24 +60,6 @@ const SignUp = () => {
               name={'name'}
               type='text'
               label={'Name'}
-              variant='standard'
-              required
-            />
-            <TextField
-              onChange={handleChange}
-              value={values.email}
-              name={'email'}
-              type='text'
-              label={'Email'}
-              variant='standard'
-              required
-            />
-            <TextField
-              onChange={handleChange}
-              value={values.password}
-              type='password'
-              name={'password'}
-              label={'Password'}
               variant='standard'
               required
             />

@@ -14,7 +14,7 @@ import { baseUrl } from 'src/constants'
 
 const LoginScreen = () => {
   const {user:loggedUser, setUser} = useAuthContext()
-  const [values, setValues] = useState({email: "", password: ''})
+  const [values, setValues] = useState({name: ""})
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ const LoginScreen = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-    if(!values.email || !values.password) return
+    if(!values.name) return
     setLoading(true)
     try{
       const res = await axios.post(`${baseUrl}/auth/login`, values, fullConfig)
@@ -59,19 +59,10 @@ const LoginScreen = () => {
         <Stack direction='column' spacing={3}>
           <TextField
             onChange={handleChange}
-            value={values.email}
-            name={'email'}
+            value={values.name}
+            name={'name'}
             type='text'
-            label={'Email'}
-            variant='standard'
-            required
-          />
-          <TextField
-            onChange={handleChange}
-            value={values.password}
-            type='password'
-            name={'password'}
-            label={'Password'}
+            label={'Name'}
             variant='standard'
             required
           />

@@ -9,12 +9,12 @@ import { baseUrl } from 'src/constants'
 import { shortConfig } from 'src/utils/rxConfig'
 
 const HomeScreen = () => {
-  const { user, authDone, clearUser } = useAuthContext()
+  const { user, clearUser } = useAuthContext()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!user && authDone) navigate('/login')
-  }, [user, authDone])
+    if(!user) navigate('/login')
+  }, [user])
 
   const handleLogout = async (confirm=true) => {
     if (confirm && !window.confirm('Are you sure to logout?!')) return
