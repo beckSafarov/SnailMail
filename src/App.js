@@ -4,6 +4,8 @@ import LandingScreen from './pages/LandingScreen'
 import SignUpScreen from './pages/auth/SignUpScreen'
 import LoginScreen from './pages/auth/LoginScreen'
 import HomeScreen from './pages/HomeScreen'
+import AllMessages from './pages/AllMessages'
+import NewMailScreen from './pages/NewMailScreen'
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path={'/signup'} element={<SignUpScreen />} />
         <Route path={'/login'} element={<LoginScreen />} />
         <Route path={'/home'} element={<HomeScreen />} />
+        <Route path={'/all-messages'} element={<AllMessages />} />
+        <Route path={'/new-mail'} element={<NewMailScreen />} />
       </Routes>
     </Router>
   )

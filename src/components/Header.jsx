@@ -1,27 +1,19 @@
-import { useNavigate } from 'react-router-dom'
-import Stack from '@mui/material/Stack'
+import React from 'react'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import axios from 'axios'
 import useAuthContext from '../hooks/useAuthContext'
-import { useEffect, useState} from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { baseUrl } from 'src/constants'
 import { shortConfig } from 'src/utils/rxConfig'
-import Sidebar from '../components/Home/Sidebar'
-import MessagesContainer from '../components/Home/MessagesContainer'
-import SendMailButton from '../components/Home/SendMailButton'
-import SendMailModal from '../components/Home/SendMailModal'
+import Stack from '@mui/system/Stack'
+import Button from '@mui/material/Button'
 
-const HomeScreen = () => {
+
+const Header = () => {
   const { user, clearUser } = useAuthContext()
-  const [modal, setModal] = useState(false);
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if(!user) navigate('/login')
-  }, [user])
-
-  const handleLogout = async (confirm=true) => {
+  
+  const handleLogout = async (confirm = true) => {
     if (confirm && !window.confirm('Are you sure to logout?!')) return
     try {
       await axios.put(`${baseUrl}/auth/logout`, {}, shortConfig)
@@ -31,7 +23,6 @@ const HomeScreen = () => {
       console.error(error)
     }
   }
-
   return (
     <>
       <Box
@@ -60,8 +51,9 @@ const HomeScreen = () => {
           </Button>
         </Stack>
       </Box>
+
     </>
   )
 }
 
-export default HomeScreen
+export default Header
