@@ -8,7 +8,7 @@ import LinearLoading from '../../components/LinearLoading'
 import axios from 'axios'
 import { fullConfig } from '../../utils/rxConfig'
 import useAuthContext from '../../hooks/useAuthContext'
-import { baseUrl } from 'src/constants'
+import { baseUrl } from '../../constants'
 
 const SignUp = () => {
   const {user:loggedUser, setUser} = useAuthContext()

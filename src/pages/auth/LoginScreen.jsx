@@ -10,7 +10,7 @@ import {useNavigate, Link} from 'react-router-dom'
 import axios from 'axios'
 import useAuthContext from '../../hooks/useAuthContext'
 import AlertBox from '../../components/AlertBox'
-import { baseUrl } from 'src/constants'
+import { baseUrl } from '../../constants'
 
 const LoginScreen = () => {
   const {user:loggedUser, setUser} = useAuthContext()

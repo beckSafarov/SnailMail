@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Stack from '@mui/system/Stack'
 import React from 'react'
-import { trunc } from 'src/utils'
+import { trunc } from '../../utils'
 
 const samplePeople = ['John Doe', 'Tom Smith', 'Justin Time']
 const sampleMessages = [

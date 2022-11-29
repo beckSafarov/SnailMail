@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react'
-import { clearStore, getStore, setStore } from 'src/utils/lcs';
+import { clearStore, getStore, setStore } from '../utils/lcs.js'
+
 
 const initialState = {
   user: getStore('user') || undefined

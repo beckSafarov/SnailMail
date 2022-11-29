@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import useAuthContext from '../hooks/useAuthContext'
 import SendMailButton from '../components/Home/SendMailButton'
 import sampleMessages from '../data/sampleMessages'
-import { trunc } from 'src/utils'
+import { trunc } from '../utils'
 import Header from '../components/Header'
 
 
