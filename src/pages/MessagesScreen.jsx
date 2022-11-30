@@ -10,9 +10,7 @@ const MessagesScreen = () => {
     <>
       <Header />
       <GoHomeLink/>
-      <Box
-        style={{margin: '80px 0',}}
-      >
+      <Box style={{margin: '80px 0',}}>
         <MessagesContainer />
       </Box>
       <SendMailButton/>

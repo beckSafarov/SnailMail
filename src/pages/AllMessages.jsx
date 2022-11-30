@@ -9,6 +9,7 @@ import FullyCentered from '../components/FullyCentered'
 import { Typography } from '@mui/material'
 import last from 'lodash/last'
 import useMailsContext from '../hooks/useMailsContext'
+import NothingMessage from '../components/NothingMessage'
 
 const AllMessages = () => {
   const { user } = useAuthContext()
@@ -47,11 +48,7 @@ const AllMessages = () => {
         }}
       >
         {mailsData.length < 1 && (
-          <FullyCentered top='40%'>
-            <Typography color='gray' fontSize='30px' fontWeight='300'>
-              No Messages Yet
-            </Typography>
-          </FullyCentered>
+          <NothingMessage/>
         )}
         {mailsData.map((msg) => (
           <Box

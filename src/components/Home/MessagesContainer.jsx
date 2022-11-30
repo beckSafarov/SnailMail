@@ -3,6 +3,7 @@ import { Box } from '@mui/system'
 import {useMemo} from 'react'
 import { useParams } from 'react-router-dom'
 import useMailsContext from '../../hooks/useMailsContext'
+import NothingMessage from '../NothingMessage'
 
 const MessagesContainer = ({}) => {
   const {mails, users} = useMailsContext()
@@ -31,6 +32,9 @@ const MessagesContainer = ({}) => {
       }}
     >
       <Stack gap={'5px'} style={{width: '100%'}}>
+        {mailsToDisplay.length < 1 && (
+          <NothingMessage/>
+        )}
         {mailsToDisplay.map((msg) => (
           <Box
             key={msg._id}
