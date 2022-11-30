@@ -4,8 +4,9 @@ import { baseUrl } from '../constants';
 
 
 const initialState = {
+  loading: false,
   users: [],
-  mails: []
+  mails: [],
 }
 
 //create context
@@ -50,13 +51,13 @@ export const MailsProvider = ({ children }) => {
     }
   }
   
-  const getMails = async (user) => {
+  const getMails = async (id) => {
     dispatch({ type: 'loading' })
     try {
-      const res = await axios.get(`${baseUrl}/users&user1=${user.id}`)
-      dispatch({ type: 'setUsers', payload: res.data.data })
+      const res = await axios.get(`${baseUrl}/messages/all?user1=${id}`)
+      dispatch({ type: 'setMails', payload: res.data.data })
     } catch (error) {
-      dispatch({ type: 'error', payload: error })
+      dispatch({ type: 'error ', payload: error })
     }
   }
 

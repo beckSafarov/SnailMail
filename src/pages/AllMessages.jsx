@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import useAuthContext from '../hooks/useAuthContext'
@@ -8,15 +8,33 @@ import { trunc } from '../utils'
 import Header from '../components/Header'
 import FullyCentered from '../components/FullyCentered'
 import { Typography } from '@mui/material'
+import last from 'lodash/last'
+import useMailsContext from '../hooks/useMailsContext'
 const data = sampleMessages
 
 const AllMessages = () => {
   const { user } = useAuthContext()
+  const {users, mails} = useMailsContext()
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!user) navigate('/login')
   }, [user])
+
+  const mailsData = useMemo(() => {
+    if(mails.length < 1) return []
+    return Object.keys(mails).map((partnerId) => {
+      const partner = users.find((user) => user._id === partnerId)
+      const lastMail = last(mails[partnerId])
+      return {
+        id: partner._id,
+        partner: partner.name, 
+        title: lastMail.title,
+        date: new Date(lastMail.date).toDateString(),
+        body: lastMail.body,
+      }
+    })
+  }, [mails, users])
 
   return (
     <>
@@ -37,10 +55,10 @@ const AllMessages = () => {
             </Typography>
           </FullyCentered>
         )}
-        {data.map((msg, i) => (
+        {mailsData.map((msg) => (
           <Box
-            key={i}
-            onClick={()=>navigate('/messages/1')}
+            key={msg.id}
+            onClick={()=>navigate(`/messages/${msg.id}`)}
             sx={{
               width: '100%',
               padding: '10px 20px',
@@ -51,7 +69,7 @@ const AllMessages = () => {
               },
             }}
           >
-            <h3 style={{ flex: 1 }}>{msg.author}</h3>
+            <h3 style={{ flex: 1 }}>{msg.partner}</h3>
             <h5 style={{ flex: 1 }}>{msg.title}</h5>
             <p style={{ flex: 3 }}>{trunc(msg.body, 100)}</p>
           </Box>
