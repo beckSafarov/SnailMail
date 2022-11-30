@@ -4,27 +4,6 @@ import {useMemo} from 'react'
 import { useParams } from 'react-router-dom'
 import useMailsContext from '../../hooks/useMailsContext'
 
-const sampleMessages = [
-  {
-    author: 'John Doe',
-    title: 'Hey what\'s up',
-    date: 'May 20, 2022',
-    body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, doloremque!'
-  },
-  {
-    author: 'Robin Kruz',
-    title: 'Hey what\'s up',
-    date: 'May 20, 2022',
-    body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, doloremque!'
-  },
-  {
-    author: 'John Doe',
-    title: 'Hey what\'s up',
-    date: 'May 20, 2022',
-    body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, doloremque!'
-  },
-]
-
 const MessagesContainer = ({}) => {
   const {mails, users} = useMailsContext()
   const {id} = useParams()

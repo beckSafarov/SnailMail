@@ -3,14 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import useAuthContext from '../hooks/useAuthContext'
 import SendMailButton from '../components/Home/SendMailButton'
-import sampleMessages from '../data/sampleMessages'
 import { trunc } from '../utils'
 import Header from '../components/Header'
 import FullyCentered from '../components/FullyCentered'
 import { Typography } from '@mui/material'
 import last from 'lodash/last'
 import useMailsContext from '../hooks/useMailsContext'
-const data = sampleMessages
 
 const AllMessages = () => {
   const { user } = useAuthContext()
@@ -48,7 +46,7 @@ const AllMessages = () => {
           margin: '80px 0',
         }}
       >
-        {data.length < 1 && (
+        {mailsData.length < 1 && (
           <FullyCentered top='40%'>
             <Typography color='gray' fontSize='30px' fontWeight='300'>
               No Messages Yet

@@ -1,19 +1,33 @@
 import Header from '../components/Header'
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import { Autocomplete, Button, TextField, Typography } from '@mui/material'
-import sampleMessages from '../data/sampleMessages'
-import { Stack } from '@mui/system'
 import FullyCentered from '../components/FullyCentered'
 import { Link } from 'react-router-dom'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import compact from 'lodash/compact'
+import useMailsContext from '../hooks/useMailsContext'
+import useAuthContext from '../hooks/useAuthContext'
+import AlertBox from '../components/AlertBox'
+import GoHomeLink from '../components/GoHomeLink'
 
-const recipientOptions = ['John Doe', 'Tom Smith', 'Begzod Safarov']
+const defs = { recipient: '', title: '', message: '' }
 
 const NewMailScreen = ({}) => {
-  const [fields, setFields] = useState({recipient: '', title: '', message: ''});
+  const {user} = useAuthContext()
+  const {users, mails, sendMail, success, resetState, loading} = useMailsContext()
+  const [fields, setFields] = useState(defs);
+  const [alert, setAlert] = useState('');
 
+  useEffect(()=>{
+    if (success) handleSuccess()
+  }, [success])
+
+  const handleSuccess = () => {
+    setAlert('Mail sent successfully')
+    resetState('success')
+    setFields(defs)
+  }
 
   const handleChange = (e) => {
     setFields({
@@ -28,9 +42,19 @@ const NewMailScreen = ({}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(!isValidated()) return
-    console.log(fields)
+    if (!isValidated()) return
+    sendMail({
+      sender: user._id,
+      recipient: fields.recipient._id,
+      title: fields.title,
+      body: fields.message,
+    })
   }
+
+  const recipientOptions = useMemo(() => {
+    if (users.length < 1) return []
+    return users.map((user) => ({ label: user.name, _id: user._id }))
+  }, [users, mails])
 
   return (
     <>
@@ -41,15 +65,15 @@ const NewMailScreen = ({}) => {
           padding: '20px 50px',
         }}
       >
-        <Link to='/home'>
-          <ArrowBackIosIcon/>
-        </Link>
+        <GoHomeLink/>
         <FullyCentered top='40%'>
           <Box sx={{ p: '20px 0' }}>
             <Typography fontWeight='500' fontSize='20px'>
               Your Message
             </Typography>
           </Box>
+          <AlertBox severity='success'>{alert}</AlertBox>
+
           <form onSubmit={handleSubmit}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Autocomplete
@@ -86,8 +110,13 @@ const NewMailScreen = ({}) => {
                 rows={3}
                 multiline
               />
-              <Button type='submit' sx={{ width: '100%' }} variant='contained'>
-                Send
+              <Button
+                disabled={loading}
+                type='submit'
+                sx={{ width: '100%' }}
+                variant='contained'
+              >
+                {loading ? 'Sending...' : 'Send'}
               </Button>
             </Box>
           </form>
