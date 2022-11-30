@@ -11,9 +11,11 @@ import axios from 'axios'
 import useAuthContext from '../../hooks/useAuthContext'
 import AlertBox from '../../components/AlertBox'
 import { baseUrl } from '../../constants'
+import useMailsContext from '../../hooks/useMailsContext'
 
 const LoginScreen = () => {
   const {user:loggedUser, setUser} = useAuthContext()
+  const {users, mails} = useMailsContext()
   const [values, setValues] = useState({name: ""})
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

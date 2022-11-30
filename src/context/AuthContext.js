@@ -13,10 +13,7 @@ const AuthReducer = (state, action) => {
   switch (action.type) {
     case 'setUser':
       setStore('user', action.payload)
-      return {
-        ...state,
-        user: action.payload
-      }
+      return { user: action.payload }
     case 'clearUser':
       clearStore('user')
       return { user: undefined }
@@ -28,12 +25,16 @@ const AuthReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  const setUser = (user) => dispatch({
-    type: "setUser",
-    payload: user
-  })
+  const setUser = (user) =>{
+    dispatch({
+      type: "setUser",
+      payload: user
+    })
+  }
   
-  const clearUser = () => dispatch({type: "clearUser"})
+  const clearUser = () => {
+    dispatch({ type: "clearUser" })
+  }
 
   return (
     <AuthContext.Provider value={{

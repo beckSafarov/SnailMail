@@ -10,7 +10,7 @@ const MessagesContainer = ({}) => {
   const {id} = useParams()
   
   const mailsToDisplay = useMemo(() => {
-    if(mails.length < 1) return []
+    if (Object.keys(mails).length < 1) return []
     return mails[id].map(mail=>{
       const author = users.find((user=>user._id === mail.sender)).name
       const date = new Date(mail.date).toDateString()

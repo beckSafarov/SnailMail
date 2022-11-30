@@ -15,9 +15,10 @@ const defs = { recipient: '', title: '', message: '' }
 
 const NewMailScreen = ({}) => {
   const {user} = useAuthContext()
-  const {users, mails, sendMail, success, resetState, loading} = useMailsContext()
+  const {users, mails, sendMail, success, resetState} = useMailsContext()
   const [fields, setFields] = useState(defs);
   const [alert, setAlert] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     if (success) handleSuccess()
@@ -40,15 +41,17 @@ const NewMailScreen = ({}) => {
     return compact(Object.values(fields)).length === 3
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     if (!isValidated()) return
-    sendMail({
+    setLoading(true)
+    await sendMail({
       sender: user._id,
       recipient: fields.recipient._id,
       title: fields.title,
       body: fields.message,
     })
+    setLoading(false)
   }
 
   const recipientOptions = useMemo(() => {

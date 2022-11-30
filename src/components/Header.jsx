@@ -7,10 +7,12 @@ import { baseUrl } from '../constants'
 import { shortConfig } from '../utils/rxConfig'
 import Stack from '@mui/system/Stack'
 import Button from '@mui/material/Button'
+import useMailsContext from '../hooks/useMailsContext'
 
 
 const Header = () => {
   const { user, clearUser } = useAuthContext()
+  const {resetEverything} = useMailsContext()
   const navigate = useNavigate()
   
   const handleLogout = async (confirm = true) => {
@@ -18,6 +20,7 @@ const Header = () => {
     try {
       await axios.put(`${baseUrl}/auth/logout`, {}, shortConfig)
       clearUser()
+      resetEverything()
       navigate('/login')
     } catch (error) {
       console.error(error)

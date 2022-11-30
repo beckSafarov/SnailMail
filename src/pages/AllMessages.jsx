@@ -15,22 +15,24 @@ const AllMessages = () => {
   const { user } = useAuthContext()
   const {users, mails} = useMailsContext()
   const navigate = useNavigate()
-
+  console.log(mails)
   useEffect(() => {
     if (!user) navigate('/login')
-  }, [user])
-
+  }, [user, mails])
+  
   const mailsData = useMemo(() => {
-    if(mails.length < 1) return []
+    if(Object.keys(mails).length < 1 || users.length < 1) return []
+    
     return Object.keys(mails).map((partnerId) => {
+      console.log(partnerId)
       const partner = users.find((user) => user._id === partnerId)
       const lastMail = last(mails[partnerId])
       return {
-        id: partner._id,
-        partner: partner.name, 
-        title: lastMail.title,
-        date: new Date(lastMail.date).toDateString(),
-        body: lastMail.body,
+        id: partner?._id,
+        partner: partner?.name, 
+        title: lastMail?.title,
+        date: new Date(lastMail?.date)?.toDateString?.(),
+        body: lastMail?.body,
       }
     })
   }, [mails, users])
@@ -38,6 +40,7 @@ const AllMessages = () => {
   return (
     <>
       <Header />
+
       <Box
         style={{
           display: 'flex',
@@ -47,13 +50,11 @@ const AllMessages = () => {
           margin: '80px 0',
         }}
       >
-        {mailsData.length < 1 && (
-          <NothingMessage/>
-        )}
+        {mailsData.length < 1 && <NothingMessage />}
         {mailsData.map((msg) => (
           <Box
             key={msg.id}
-            onClick={()=>navigate(`/messages/${msg.id}`)}
+            onClick={() => navigate(`/messages/${msg.id}`)}
             sx={{
               width: '100%',
               padding: '10px 20px',
@@ -70,7 +71,7 @@ const AllMessages = () => {
           </Box>
         ))}
       </Box>
-      <SendMailButton/>
+      <SendMailButton />
     </>
   )
 }

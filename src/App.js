@@ -13,15 +13,23 @@ import Loading from './components/Loading'
 
 function App() {
   const {user} = useAuthContext()
-  const {getUsers, getMails, loading, users, mails} = useMailsContext()
+  const {getUsers, getMails, loading, users, mails, checkInbox} = useMailsContext()
 
   useEffect(() => {
-    if(user && users.length < 1) handleGetData()
-  }, [user, users]);
+    if (user) {
+      handleGetData()
+      setInterval(updateMails, 5000)
+    }
+  }, [user]);
 
   const handleGetData = async () => {
     await getUsers()
     await getMails(user._id)
+  }
+
+  const updateMails = async()=>{
+    await getUsers()
+    await checkInbox(user._id)
   }
   return (
     <>
