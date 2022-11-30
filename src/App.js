@@ -15,8 +15,7 @@ function App() {
         <Route path={'/'} element={<LandingScreen />} />
         <Route path={'/signup'} element={<SignUpScreen />} />
         <Route path={'/login'} element={<LoginScreen />} />
-        <Route path={'/home'} element={<HomeScreen />} />
-        <Route path={'/all-messages'} element={<AllMessages />} />
+        <Route path={'/home'} element={<AllMessages />} />
         <Route path={'/new-mail'} element={<NewMailScreen />} />
         <Route path={'/messages/:id'} element={<MessagesScreen />} />
       </Routes>

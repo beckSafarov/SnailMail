@@ -45,7 +45,7 @@ const Header = () => {
             justifyContent: 'space-between',
           }}
         >
-          <Link to='/all-messages'>
+          <Link to='/home'>
             <h3>{user?.name}</h3>
           </Link>
           <Button onClick={handleLogout} variant='contained'>

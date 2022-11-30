@@ -41,7 +41,7 @@ const NewMailScreen = ({}) => {
           padding: '20px 50px',
         }}
       >
-        <Link to='/all-messages'>
+        <Link to='/home'>
           <ArrowBackIosIcon/>
         </Link>
         <FullyCentered top='40%'>
