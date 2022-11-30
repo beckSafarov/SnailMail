@@ -1,6 +1,8 @@
 import { Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import {useMemo} from 'react'
+import { useParams } from 'react-router-dom'
+import useMailsContext from '../../hooks/useMailsContext'
 
 const sampleMessages = [
   {
@@ -24,6 +26,22 @@ const sampleMessages = [
 ]
 
 const MessagesContainer = ({}) => {
+  const {mails, users} = useMailsContext()
+  const {id} = useParams()
+  
+  const mailsToDisplay = useMemo(() => {
+    if(mails.length < 1) return []
+    return mails[id].map(mail=>{
+      const author = users.find((user=>user._id === mail.sender)).name
+      const date = new Date(mail.date).toDateString()
+      return {
+        ...mail,
+        author,
+        date,
+      }
+    })
+  },[mails, users])
+
   return (
     <Box
       style={{
@@ -34,9 +52,9 @@ const MessagesContainer = ({}) => {
       }}
     >
       <Stack gap={'5px'} style={{width: '100%'}}>
-        {sampleMessages.map((msg, i) => (
+        {mailsToDisplay.map((msg) => (
           <Box
-            key={i}
+            key={msg._id}
             style={{
               flex: '1',
               display: 'flex',

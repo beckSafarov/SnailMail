@@ -10,6 +10,7 @@ import MessagesScreen from './pages/MessagesScreen'
 import useAuthContext from './hooks/useAuthContext'
 import { useEffect } from 'react'
 import useMailsContext from './hooks/useMailsContext'
+import Loading from './components/Loading'
 
 function App() {
   const {user} = useAuthContext()
@@ -23,9 +24,9 @@ function App() {
     await getUsers()
     await getMails(user._id)
   }
-  console.log({mails, users})
   return (
     <>
+    {loading && <Loading/>}
       {!loading && (
         <Router>
           <Routes>
