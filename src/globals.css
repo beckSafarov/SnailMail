@@ -9,10 +9,10 @@ body{
 }
 
 a{
-  color: #007acc;
   text-decoration: none;
+  color: inherit;
 }
 
-a:hover{
+/* a:hover{
   text-decoration: underline;
-}
+} */

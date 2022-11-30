@@ -2,7 +2,7 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import useAuthContext from '../hooks/useAuthContext'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { baseUrl } from '../constants'
 import { shortConfig } from '../utils/rxConfig'
 import Stack from '@mui/system/Stack'
@@ -45,13 +45,14 @@ const Header = () => {
             justifyContent: 'space-between',
           }}
         >
-          <h3>{user?.name}</h3>
+          <Link to='/all-messages'>
+            <h3>{user?.name}</h3>
+          </Link>
           <Button onClick={handleLogout} variant='contained'>
             Logout
           </Button>
         </Stack>
       </Box>
-
     </>
   )
 }

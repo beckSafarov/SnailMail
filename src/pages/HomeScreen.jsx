@@ -7,10 +7,6 @@ import useAuthContext from '../hooks/useAuthContext'
 import { useEffect, useState} from 'react'
 import { baseUrl } from '../constants'
 import { shortConfig } from '../utils/rxConfig'
-import Sidebar from '../components/Home/Sidebar'
-import MessagesContainer from '../components/Home/MessagesContainer'
-import SendMailButton from '../components/Home/SendMailButton'
-import SendMailModal from '../components/Home/SendMailModal'
 
 const HomeScreen = () => {
   const { user, clearUser } = useAuthContext()

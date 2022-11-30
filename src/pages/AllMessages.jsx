@@ -6,11 +6,12 @@ import SendMailButton from '../components/Home/SendMailButton'
 import sampleMessages from '../data/sampleMessages'
 import { trunc } from '../utils'
 import Header from '../components/Header'
-
+import FullyCentered from '../components/FullyCentered'
+import { Typography } from '@mui/material'
+const data = sampleMessages
 
 const AllMessages = () => {
-  const { user, clearUser } = useAuthContext()
-  const [modal, setModal] = useState(false)
+  const { user } = useAuthContext()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const AllMessages = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Box
         style={{
           display: 'flex',
@@ -29,9 +30,17 @@ const AllMessages = () => {
           margin: '80px 0',
         }}
       >
-        {sampleMessages.map((msg, i) => (
+        {data.length < 1 && (
+          <FullyCentered top='40%'>
+            <Typography color='gray' fontSize='30px' fontWeight='300'>
+              No Messages Yet
+            </Typography>
+          </FullyCentered>
+        )}
+        {data.map((msg, i) => (
           <Box
             key={i}
+            onClick={()=>navigate('/messages/1')}
             sx={{
               width: '100%',
               padding: '10px 20px',
@@ -48,9 +57,7 @@ const AllMessages = () => {
           </Box>
         ))}
       </Box>
-      <SendMailButton
-        onClick={() => navigate('/new-mail')}
-      />
+      <SendMailButton/>
     </>
   )
 }
