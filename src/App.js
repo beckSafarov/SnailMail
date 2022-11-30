@@ -6,6 +6,7 @@ import LoginScreen from './pages/auth/LoginScreen'
 import HomeScreen from './pages/HomeScreen'
 import AllMessages from './pages/AllMessages'
 import NewMailScreen from './pages/NewMailScreen'
+import MessagesScreen from './pages/MessagesScreen'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path={'/home'} element={<HomeScreen />} />
         <Route path={'/all-messages'} element={<AllMessages />} />
         <Route path={'/new-mail'} element={<NewMailScreen />} />
+        <Route path={'/messages/:id'} element={<MessagesScreen />} />
       </Routes>
     </Router>
   )
